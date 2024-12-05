@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Inscritos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Listado de Inscritos</h2>
+        <a href="{% url 'inscrito-create' %}" class="btn btn-success mb-3">Nuevo Inscrito</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Institución</th>
+                    <th>Número de Personas</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inscrito in inscritos %}
+                <tr>
+                    <td>{{ inscrito.nombre }}</td>
+                    <td>{{ inscrito.institucion.nombre }}</td>
+                    <td>{{ inscrito.nro_personas }}</td>
+                    <td>{{ inscrito.estado }}</td>
+                    <td>
+                        <a href="{% url 'inscrito-detail' inscrito.id %}" class="btn btn-info btn-sm">Ver</a>
+                        <a href="{% url 'inscrito-update' inscrito.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'inscrito-delete' inscrito.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
