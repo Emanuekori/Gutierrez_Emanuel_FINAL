@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Inscrito, Institucion
 from .forms import InscritoForm, InstitucionForm
 
-# Vistas basadas en clases (CBV)
+# Vistas basadas en clases (CBV) para Inscritos
 class InscritoListView(ListView):
     model = Inscrito
     template_name = "inscritos/inscrito_list.html"
@@ -32,21 +32,29 @@ class InscritoDeleteView(DeleteView):
     template_name = "inscritos/inscrito_confirm_delete.html"
     success_url = reverse_lazy('inscrito-list')
 
-# Vistas basadas en funciones(FBV)
-def institucion_list(request):
-    instituciones = Institucion.objects.all()
-    return render(request, 'instituciones/institucion_list.html', {'instituciones': instituciones})
+# Vistas basadas en clases (CBV) para Instituciones
+class InstitucionListView(ListView):
+    model = Institucion
+    template_name = "instituciones/institucion_list.html"
+    context_object_name = "instituciones"
 
-def institucion_detail(request, pk):
-    institucion = get_object_or_404(Institucion, pk=pk)
-    return JsonResponse({'id': institucion.id, 'nombre': institucion.nombre})
+class InstitucionDetailView(DetailView):
+    model = Institucion
+    template_name = "instituciones/institucion_detail.html"
 
-def institucion_create(request):
-    if request.method == 'POST':
-        form = InstitucionForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return JsonResponse({'message': 'Institución creada exitosamente'})
-    else:
-        form = InstitucionForm()
-    return render(request, 'instituciones/institucion_form.html', {'form': form})
+class InstitucionCreateView(CreateView):
+    model = Institucion
+    form_class = InstitucionForm
+    template_name = "instituciones/institucion_form.html"
+    success_url = reverse_lazy('institucion-list')
+
+class InstitucionUpdateView(UpdateView):
+    model = Institucion
+    form_class = InstitucionForm
+    template_name = "instituciones/institucion_form.html"
+    success_url = reverse_lazy('institucion-list')
+
+class InstitucionDeleteView(DeleteView):
+    model = Institucion
+    template_name = "instituciones/institucion_confirm_delete.html"
+    success_url = reverse_lazy('institucion-list')

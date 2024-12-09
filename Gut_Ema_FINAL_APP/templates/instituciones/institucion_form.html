@@ -9,6 +9,7 @@
 <body>
     <div class="container mt-5">
         <h2>Nueva Institución</h2>
+        <a href="javascript:history.back()" class="btn btn-secondary mb-3">Regresar</a>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
