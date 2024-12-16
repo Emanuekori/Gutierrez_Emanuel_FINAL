@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Gut_Ema_FINAL_APP'
+    'Gut_Ema_FINAL_APP',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

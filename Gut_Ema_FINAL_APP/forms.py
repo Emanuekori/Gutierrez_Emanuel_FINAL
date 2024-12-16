@@ -28,6 +28,12 @@ class InscritoForm(forms.ModelForm):
             raise forms.ValidationError("El número de personas debe estar entre 1 y 30.")
         return nro_personas
 
+    def clean_nombre(self):
+        nombre = self.cleaned_data['nombre']
+        if len(nombre) > 80:
+            raise forms.ValidationError("El nombre de la institución no debe superar los 80 caracteres.")
+        return nombre
+    
     def clean_telefono(self):
         telefono = self.cleaned_data['telefono']
         if not telefono.isdigit() or len(telefono) < 8:

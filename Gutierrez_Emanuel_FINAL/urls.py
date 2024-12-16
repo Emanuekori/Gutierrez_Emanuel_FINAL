@@ -1,6 +1,10 @@
 from django.urls import path
-from Gut_Ema_FINAL_APP.views import (InscritoListView, InscritoDetailView, InscritoCreateView, InscritoUpdateView, InscritoDeleteView,InstitucionListView, InstitucionDetailView, InstitucionCreateView, InstitucionUpdateView, InstitucionDeleteView)
 from django.views.generic.base import TemplateView
+from Gut_Ema_FINAL_APP.views import (
+    InscritoListView, InscritoDetailView, InscritoCreateView, InscritoUpdateView, InscritoDeleteView,
+    InstitucionListView, InstitucionDetailView, InstitucionCreateView, InstitucionUpdateView, InstitucionDeleteView,
+    InscritoAPIView, institucion_api_view, institucion_detail_api_view, autor_api_view
+)
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name="index.html"), name='index'),
@@ -14,4 +18,8 @@ urlpatterns = [
     path('instituciones/create/', InstitucionCreateView.as_view(), name='institucion-create'),
     path('instituciones/<int:pk>/update/', InstitucionUpdateView.as_view(), name='institucion-update'),
     path('instituciones/<int:pk>/delete/', InstitucionDeleteView.as_view(), name='institucion-delete'),
+    path('api/inscritos/', InscritoAPIView.as_view(), name='inscrito-api'),
+    path('api/instituciones/', institucion_api_view, name='institucion-api'),
+    path('api/instituciones/<int:pk>/', institucion_detail_api_view, name='institucion-detail-api'),
+    path('api/autor/', autor_api_view, name='autor-api'),
 ]
